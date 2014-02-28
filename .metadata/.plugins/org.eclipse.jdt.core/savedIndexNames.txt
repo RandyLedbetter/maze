@@ -1,0 +1,3 @@
+INDEX VERSION 1.126+C:\wamp\www\maze\.metadata\.plugins\org.eclipse.jdt.core
+3197859823.index
+3166715559.index
