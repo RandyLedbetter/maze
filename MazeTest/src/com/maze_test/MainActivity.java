@@ -39,8 +39,9 @@ public class MainActivity extends Activity
        iv.setOnTouchListener (this);
     }
     
-    ImageView im = (ImageView) findViewById(R.id.image_areas);
-    im.setImageResource(R.drawable.image_map1);
+    //ImageView im = (ImageView) findViewById(R.id.image_areas);
+    //im.setImageResource(R.drawable.image_map1);
+    //im.setTag(R.drawable.image_map1);
     
     toast ("Touch the screen to discover where the regions are.");
 }
@@ -62,8 +63,8 @@ public boolean onTouch (View v, MotionEvent ev)
     //int nextImage = -1;			// resource id of the next image to display
 
     // If we cannot find the imageView, return.
-    ImageView imageView = (ImageView) v.findViewById (R.id.image);
-    ImageView imageMap = (ImageView) findViewById (R.id.image_areas);
+    ImageView imageView = (ImageView) v.findViewById(R.id.image);
+    ImageView imageMap = (ImageView) findViewById(R.id.image_areas);
     if (imageView == null) return false;
 
     // When the action is Down, see if we should show the "pressed" image for the default image.
@@ -101,7 +102,7 @@ public boolean onTouch (View v, MotionEvent ev)
        ColorTool ct = new ColorTool ();
        int tolerance = 25;
       
-       if (ct.closeMatch (Color.RED, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "RED"); state = true; toast("RED true");}
+       if (ct.closeMatch (Color.RED, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "RED"); state=true; toast("RED true");}
        else if (ct.closeMatch (Color.BLUE, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "BLUE"); state = true; toast("BLUE true");}
        else if (ct.closeMatch (Color.YELLOW, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "YELLOW"); state = true; toast("YELLOW true");}
        else if (ct.closeMatch (Color.WHITE, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "WHITE"); state = true; toast("WHITE true");}
@@ -121,37 +122,44 @@ public boolean onTouch (View v, MotionEvent ev)
 
 private void getNextRoom(ImageView view, ImageView map, String color) {
 	
-	ImageView cr = (ImageView) view;
+	//ImageView cr = (ImageView) view;
 	//ImageView cm = (ImageView) map;
-	Integer curRoom = (Integer) cr.getTag();
+	Integer curRoom = (Integer) view.getTag();
 	//Integer curMap = (Integer) cm.getTag();
 	curRoom = (curRoom == null) ? 0 : curRoom;
 	//curMap = (cm == null) ? 0 : curMap;
 	switch(curRoom) {
 		case R.drawable.room1:
-		{
+		{	
 			if(color == "RED") {
 				view.setImageResource(R.drawable.room20);
 				view.setTag(R.drawable.room20);
-				//cm.setImageResource(R.drawable.image_map20);
+				map.setImageResource(R.drawable.image_map20);
+				map.setTag(R.drawable.image_map20);
+				
+				
 			}
 			break;
 		}
 		case R.drawable.room20:
-		{
-			if(color == "YELLOW") {
+		{	
+			if(color == "RED") {
+				
+			}
+			else if(color == "YELLOW") {
 				view.setImageResource(R.drawable.room1);
 				view.setTag(R.drawable.room1);
-				//cm.setImageResource(R.drawable.image_map1);
+				map.setImageResource(R.drawable.image_map1);
+				map.setTag(R.drawable.image_map1);
+				
+			}
+			else if(color == "BLUE") {
 			}
 			break;
 		}
 		default:
 		{
-			view.setImageResource(R.drawable.room1);
-			view.setTag(R.drawable.room1);
-			//cm.setImageResource(R.drawable.image_map1);
-			//cm.setTag(R.drawable.image_map1);	
+				
 		}
 	}
 }
