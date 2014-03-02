@@ -1,11 +1,15 @@
 package com.maze_test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
+import android.util.SparseArray;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -121,7 +125,43 @@ public boolean onTouch (View v, MotionEvent ev)
 // More methods
 
 private void getNextRoom(ImageView view, ImageView map, String color) {
+	//now we set our rooms
+	// <R.drawable.room#, map<color, pair<associatedRoom#. associatedRoomMap#>>>
+	SparseArray<Map<String, Pair<Integer, Integer>>> rooms = new SparseArray<Map<String, Pair<Integer, Integer>>>();
 	
+
+	//room 1
+	Map<String, Pair<Integer, Integer>> room1 = new HashMap<String, Pair<Integer, Integer>>();
+	room1.put("RED", new Pair<Integer, Integer>(R.drawable.room20, R.drawable.image_map20));
+	//room1.put("BLUE", new Pair<Integer, Integer>(R.drawable.room26, R.drawable.image_map26));
+	//room1.put("YELLOW", new Pair<Integer, Integer>(R.drawable.room41, R.drawable.image_map41));
+	//room1.put("WHITE", new Pair<Integer, Integer>(R.drawable.room21, R.drawable.image_map21));
+	
+	//room 20
+	Map<String, Pair<Integer, Integer>> room20 = new HashMap<String, Pair<Integer, Integer>>();
+	room20.put("YELLOW", new Pair<Integer, Integer>(R.drawable.room1, R.drawable.image_map1));
+	//room20.put("BLUE", new Pair<Integer, Integer>(R.drawable.room27, R.drawable.image_map27));
+	//room20.put("RED", new Pair<Integer, Integer>(R.drawable.room5, R.drawable.image_map5));
+	
+	//now add our room relations to the main room map!
+	rooms.put(R.drawable.room1, room1);
+	rooms.put(R.drawable.room20, room20);
+	
+	//ImageView cr = (ImageView) view;
+	//ImageView cm = (ImageView) map;
+	Integer curRoom = (Integer) view.getTag();
+	//Integer curMap = (Integer) cm.getTag();
+	curRoom = (curRoom == null) ? 0 : curRoom;
+	//curMap = (cm == null) ? 0 : curMap;
+	
+	//first is room image
+	view.setImageResource(rooms.get(curRoom).get(color).first);
+	view.setTag(rooms.get(curRoom).get(color).first);
+	//second is image map
+	map.setImageResource(rooms.get(curRoom).get(color).second);
+	map.setTag(rooms.get(curRoom).get(color).second);
+	
+	/*
 	//ImageView cr = (ImageView) view;
 	//ImageView cm = (ImageView) map;
 	Integer curRoom = (Integer) view.getTag();
@@ -162,6 +202,7 @@ private void getNextRoom(ImageView view, ImageView map, String color) {
 				
 		}
 	}
+	*/
 }
 
 /**
