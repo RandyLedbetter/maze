@@ -154,55 +154,21 @@ private void getNextRoom(ImageView view, ImageView map, String color) {
 	curRoom = (curRoom == null) ? 0 : curRoom;
 	//curMap = (cm == null) ? 0 : curMap;
 	
-	//first is room image
-	view.setImageResource(rooms.get(curRoom).get(color).first);
-	view.setTag(rooms.get(curRoom).get(color).first);
-	//second is image map
-	map.setImageResource(rooms.get(curRoom).get(color).second);
-	map.setTag(rooms.get(curRoom).get(color).second);
-	
-	/*
-	//ImageView cr = (ImageView) view;
-	//ImageView cm = (ImageView) map;
-	Integer curRoom = (Integer) view.getTag();
-	//Integer curMap = (Integer) cm.getTag();
-	curRoom = (curRoom == null) ? 0 : curRoom;
-	//curMap = (cm == null) ? 0 : curMap;
-	switch(curRoom) {
-		case R.drawable.room1:
-		{	
-			if(color == "RED") {
-				view.setImageResource(R.drawable.room20);
-				view.setTag(R.drawable.room20);
-				map.setImageResource(R.drawable.image_map20);
-				map.setTag(R.drawable.image_map20);
-				
-				
-			}
-			break;
-		}
-		case R.drawable.room20:
-		{	
-			if(color == "RED") {
-				
-			}
-			else if(color == "YELLOW") {
-				view.setImageResource(R.drawable.room1);
-				view.setTag(R.drawable.room1);
-				map.setImageResource(R.drawable.image_map1);
-				map.setTag(R.drawable.image_map1);
-				
-			}
-			else if(color == "BLUE") {
-			}
-			break;
-		}
-		default:
-		{
-				
-		}
+	//error check
+	//check if our room exists, and that there's something mapped to that color
+	if(rooms.get(curRoom) != null && rooms.get(curRoom).get(color) != null)
+	{
+		//first is room image
+		view.setImageResource(rooms.get(curRoom).get(color).first);
+		view.setTag(rooms.get(curRoom).get(color).first);
+		//second is image map
+		map.setImageResource(rooms.get(curRoom).get(color).second);
+		map.setTag(rooms.get(curRoom).get(color).second);
 	}
-	*/
+	else
+	{
+		toast("This room has not been implemented yet!");		
+	}
 }
 
 /**
