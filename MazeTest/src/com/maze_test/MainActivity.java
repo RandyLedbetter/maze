@@ -182,8 +182,8 @@ private void getNextRoom(ImageView view, ImageView map, String color) {
 	Map<String, Pair<Integer, Integer>> room8 = new HashMap<String, Pair<Integer, Integer>>();
 	room8.put("YELLOW", new Pair<Integer, Integer>(R.drawable.room31, R.drawable.image_map31));
 	room8.put("RED", new Pair<Integer, Integer>(R.drawable.room6, R.drawable.image_map6));
-	room8.put("BLUE", new Pair<Integer, Integer>(R.drawable.room29, R.drawable.image_map12));
-	room8.put("WHITE", new Pair<Integer, Integer>(R.drawable.room12, R.drawable.image_map33));
+	room8.put("BLUE", new Pair<Integer, Integer>(R.drawable.room29, R.drawable.image_map29));
+	room8.put("WHITE", new Pair<Integer, Integer>(R.drawable.room12, R.drawable.image_map12));
 
 	//room 9
 	Map<String, Pair<Integer, Integer>> room9 = new HashMap<String, Pair<Integer, Integer>>();
@@ -193,7 +193,7 @@ private void getNextRoom(ImageView view, ImageView map, String color) {
 	//room 10
 	Map<String, Pair<Integer, Integer>> room10 = new HashMap<String, Pair<Integer, Integer>>();
 	room10.put("RED", new Pair<Integer, Integer>(R.drawable.room34, R.drawable.image_map34));
-	room10.put("YELLOW", new Pair<Integer, Integer>(R.drawable.room41, R.drawable.image_map14));
+	room10.put("YELLOW", new Pair<Integer, Integer>(R.drawable.room41, R.drawable.image_map41));
 	room10.put("BLUE", new Pair<Integer, Integer>(R.drawable.room14, R.drawable.image_map14));
 	
 	//room 11
@@ -334,7 +334,7 @@ private void getNextRoom(ImageView view, ImageView map, String color) {
 	
 	//room 34
 	Map<String, Pair<Integer, Integer>> room34 = new HashMap<String, Pair<Integer, Integer>>();
-	room34.put("BLUE", new Pair<Integer, Integer>(R.drawable.room10, R.drawable.image_map25));
+	room34.put("BLUE", new Pair<Integer, Integer>(R.drawable.room10, R.drawable.image_map10));
 	room34.put("RED", new Pair<Integer, Integer>(R.drawable.room25, R.drawable.image_map25));
 
 	//room 35
@@ -372,8 +372,10 @@ private void getNextRoom(ImageView view, ImageView map, String color) {
 	room40.put("YELLOW", new Pair<Integer, Integer>(R.drawable.room38, R.drawable.image_map38));
 	
 	//room 41
+	//TODO - ladder needs to go to room 35
 	Map<String, Pair<Integer, Integer>> room41 = new HashMap<String, Pair<Integer, Integer>>();
 	room41.put("YELLOW", new Pair<Integer, Integer>(R.drawable.room1, R.drawable.image_map1));
+	//room41.put("WHITE", new Pair<Integer, Integer>(R.drawable.room35, R.drawable.image_map35));
 	room41.put("RED", new Pair<Integer, Integer>(R.drawable.room10, R.drawable.image_map10));
 	room41.put("BLUE", new Pair<Integer, Integer>(R.drawable.room38, R.drawable.image_map38));
 
