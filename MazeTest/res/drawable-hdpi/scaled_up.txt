@@ -1,0 +1,3 @@
+I could not download the 1280x960 resolutions for rooms 2, 17, and 22
+
+so they've been scaled up from 960x720
