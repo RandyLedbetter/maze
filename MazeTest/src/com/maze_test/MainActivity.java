@@ -132,11 +132,34 @@ private void getNextRoom(ImageView view, ImageView map, String color) {
 
 	//room 1
 	Map<String, Pair<Integer, Integer>> room1 = new HashMap<String, Pair<Integer, Integer>>();
-	room1.put("RED", new Pair<Integer, Integer>(R.drawable.room20, R.drawable.image_map20));
-	//room1.put("BLUE", new Pair<Integer, Integer>(R.drawable.room26, R.drawable.image_map26));
-	//room1.put("YELLOW", new Pair<Integer, Integer>(R.drawable.room41, R.drawable.image_map41));
-	//room1.put("WHITE", new Pair<Integer, Integer>(R.drawable.room21, R.drawable.image_map21));
+	room1.put("BLUE", new Pair<Integer, Integer>(R.drawable.room20, R.drawable.image_map20));
+	room1.put("RED", new Pair<Integer, Integer>(R.drawable.room26, R.drawable.image_map26));
+	room1.put("YELLOW", new Pair<Integer, Integer>(R.drawable.room41, R.drawable.image_map41));
+	room1.put("FUSCIA", new Pair<Integer, Integer>(R.drawable.room21, R.drawable.image_map21));
 	
+	//room 2
+	Map<String, Pair<Integer, Integer>> room2 = new HashMap<String, Pair<Integer, Integer>>();
+	room2.put("BLUE", new Pair<Integer, Integer>(R.drawable.room29, R.drawable.image_map29));
+	room2.put("RED", new Pair<Integer, Integer>(R.drawable.room22, R.drawable.image_map22));
+	room2.put("YELLOW", new Pair<Integer, Integer>(R.drawable.room12, R.drawable.image_map12));
+
+	//room 3
+	Map<String, Pair<Integer, Integer>> room3 = new HashMap<String, Pair<Integer, Integer>>();
+	room3.put("YELLOW", new Pair<Integer, Integer>(R.drawable.room33, R.drawable.image_map33));
+	room3.put("RED", new Pair<Integer, Integer>(R.drawable.room9, R.drawable.image_map9));
+	room3.put("BLUE", new Pair<Integer, Integer>(R.drawable.room18, R.drawable.image_map18));
+	
+	//room 4
+	Map<String, Pair<Integer, Integer>> room4 = new HashMap<String, Pair<Integer, Integer>>();
+	room4.put("BLUE", new Pair<Integer, Integer>(R.drawable.room44, R.drawable.image_map44));
+	room4.put("RED", new Pair<Integer, Integer>(R.drawable.room29, R.drawable.image_map29));
+	room4.put("YELLOW", new Pair<Integer, Integer>(R.drawable.room15, R.drawable.image_map15));
+	room4.put("YELLOW", new Pair<Integer, Integer>(R.drawable.room11, R.drawable.image_map11));
+	room4.put("FUSCIA", new Pair<Integer, Integer>(R.drawable.room16, R.drawable.image_map16));
+	room4.put("CYAN", new Pair<Integer, Integer>(R.drawable.room24, R.drawable.image_map24));
+	room4.put("GREEN", new Pair<Integer, Integer>(R.drawable.room43, R.drawable.image_map43));
+
+
 	//room 20
 	Map<String, Pair<Integer, Integer>> room20 = new HashMap<String, Pair<Integer, Integer>>();
 	room20.put("YELLOW", new Pair<Integer, Integer>(R.drawable.room1, R.drawable.image_map1));
@@ -145,6 +168,9 @@ private void getNextRoom(ImageView view, ImageView map, String color) {
 	
 	//now add our room relations to the main room map!
 	rooms.put(R.drawable.room1, room1);
+	rooms.put(R.drawable.room2, room2);
+	rooms.put(R.drawable.room3, room3);
+	rooms.put(R.drawable.room4, room4);
 	rooms.put(R.drawable.room20, room20);
 	
 	//ImageView cr = (ImageView) view;
