@@ -4,5 +4,6 @@
     <string name="app_name">MazeTest</string>
     <string name="action_settings">Settings</string>
     <string name="desc">Room Image</string>
+    <string name="captions">Captions are not working if you see this string of text.</string>
 
 </resources>

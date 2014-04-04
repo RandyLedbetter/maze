@@ -1,0 +1,51 @@
+1
+00:00:00,000 --> 00:00:01,000
+
+
+2
+00:00:03,000 --> 00:00:08,000
+
+
+3
+00:00:10,000 --> 00:00:15,000
+
+
+4
+00:00:17,000 --> 00:00:22,000
+
+
+
+5
+00:00:24,000 --> 00:00:29,000
+
+
+
+6
+00:00:31,000 --> 00:00:36,000
+
+
+
+7
+00:00:38,000 --> 00:00:43,000
+
+
+The Maze<br>
+<br>
+I met them at the gate though I usually wait inside. Preoccupied with their own thoughts, impatient, like so many children, they didn't see who I really was. They never noticed my crown, my pain, the fire in my eyes.<br>
+<br>
+Like all others they think the Maze was made for them; actually, it is the other way around. They think I am some poet who will lead them through the symbols and spaces of this Underworld. They think I will teach them lessons. They should call me Cerberus...I am the lesson.<br>
+<br>
+The monstrous walls rise up and run away as far as the human eye can see, circling and dividing. Which half is the Maze?<br>
+<br>
+Even I get lost. It changes - sometimes slowly, imperceptibly...sometimes suddenly. This House is not only made of stone and mortar, wood and paint; it is made of time and mystery, hope and fear. Construction never stops. I take some pride in my role as architect.<br>
+<br>
+They think I will guide them to the center. Perhaps I will...<br>
+<br>
+The sun was very hot.<br>
+<br>
+Together we walked through the gate into...<br>
+<br>
+<a href="javascript: AppendLink(&apos;..\/Rooms\/01.htm&apos;);">Room 1</a><br>
+<br>
+
+<script language="javascript">WriteFooter();</script>

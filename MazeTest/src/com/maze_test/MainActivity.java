@@ -6,6 +6,7 @@ import java.util.Map;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.media.MediaPlayer.OnTimedTextListener;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
@@ -14,6 +15,22 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.io.Closeable;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import com.maze_test.R;
+
+
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.TrackInfo;
+import android.media.TimedText;
+import android.os.Handler;
+import android.widget.TextView;
 
 /**
  * This activity displays an image on the screen. 
@@ -24,13 +41,73 @@ import android.widget.Toast;
  */
 
 public class MainActivity extends Activity 
-    implements View.OnTouchListener 
+implements View.OnTouchListener,OnTimedTextListener 
 {
+	
+// Variable declarations for MediaPlayer
+private static final String TAG = "TimedTextTest";
+private TextView txtDisplay;
+private static Handler handler = new Handler();
+MediaPlayer mediaPlayer;
 
-/**
- * Create the view for the activity.
- *
- */
+
+// Captions and audio file map initializing function
+public Map<Integer, Pair<Integer,Integer>> mediaFileInit() {
+	Map<Integer, Pair<Integer, Integer>> roomNarratives = new HashMap<Integer, Pair<Integer, Integer>>();
+	
+	// Add corresponding audio and caption files to the media file map
+	roomNarratives.put(R.drawable.room1, new Pair<Integer, Integer>(R.raw.room_audio1, R.raw.sub1));
+	roomNarratives.put(R.drawable.room2, new Pair<Integer, Integer>(R.raw.room_audio2, R.raw.sub2));
+	roomNarratives.put(R.drawable.room3, new Pair<Integer, Integer>(R.raw.room_audio3, R.raw.sub3));
+	roomNarratives.put(R.drawable.room4, new Pair<Integer, Integer>(R.raw.room_audio4, R.raw.sub4));
+	roomNarratives.put(R.drawable.room5, new Pair<Integer, Integer>(R.raw.room_audio5, R.raw.sub5));
+	roomNarratives.put(R.drawable.room6, new Pair<Integer, Integer>(R.raw.room_audio6, R.raw.sub6));
+	roomNarratives.put(R.drawable.room7, new Pair<Integer, Integer>(R.raw.room_audio7, R.raw.sub7));
+	roomNarratives.put(R.drawable.room8, new Pair<Integer, Integer>(R.raw.room_audio8, R.raw.sub8));
+	roomNarratives.put(R.drawable.room9, new Pair<Integer, Integer>(R.raw.room_audio9, R.raw.sub9));
+	roomNarratives.put(R.drawable.room10, new Pair<Integer, Integer>(R.raw.room_audio10, R.raw.sub10));
+	roomNarratives.put(R.drawable.room11, new Pair<Integer, Integer>(R.raw.room_audio11, R.raw.sub11));
+	roomNarratives.put(R.drawable.room12, new Pair<Integer, Integer>(R.raw.room_audio12, R.raw.sub12));
+	roomNarratives.put(R.drawable.room13, new Pair<Integer, Integer>(R.raw.room_audio13, R.raw.sub13));
+	roomNarratives.put(R.drawable.room14, new Pair<Integer, Integer>(R.raw.room_audio14, R.raw.sub14));
+	roomNarratives.put(R.drawable.room15, new Pair<Integer, Integer>(R.raw.room_audio15, R.raw.sub15));
+	roomNarratives.put(R.drawable.room16, new Pair<Integer, Integer>(R.raw.room_audio16, R.raw.sub16));
+	roomNarratives.put(R.drawable.room17, new Pair<Integer, Integer>(R.raw.room_audio17, R.raw.sub17));
+	roomNarratives.put(R.drawable.room18, new Pair<Integer, Integer>(R.raw.room_audio18, R.raw.sub18));
+	roomNarratives.put(R.drawable.room19, new Pair<Integer, Integer>(R.raw.room_audio19, R.raw.sub19));
+	roomNarratives.put(R.drawable.room20, new Pair<Integer, Integer>(R.raw.room_audio20, R.raw.sub20));
+	roomNarratives.put(R.drawable.room21, new Pair<Integer, Integer>(R.raw.room_audio21, R.raw.sub21));
+	roomNarratives.put(R.drawable.room22, new Pair<Integer, Integer>(R.raw.room_audio22, R.raw.sub22));
+	roomNarratives.put(R.drawable.room23, new Pair<Integer, Integer>(R.raw.room_audio23, R.raw.sub23));
+	roomNarratives.put(R.drawable.room24, new Pair<Integer, Integer>(R.raw.room_audio24, R.raw.sub24));
+	roomNarratives.put(R.drawable.room25, new Pair<Integer, Integer>(R.raw.room_audio25, R.raw.sub25));
+	roomNarratives.put(R.drawable.room26, new Pair<Integer, Integer>(R.raw.room_audio26, R.raw.sub26));
+	roomNarratives.put(R.drawable.room27, new Pair<Integer, Integer>(R.raw.room_audio27, R.raw.sub27));
+	roomNarratives.put(R.drawable.room28, new Pair<Integer, Integer>(R.raw.room_audio28, R.raw.sub28));
+	roomNarratives.put(R.drawable.room29, new Pair<Integer, Integer>(R.raw.room_audio29, R.raw.sub29));
+	roomNarratives.put(R.drawable.room30, new Pair<Integer, Integer>(R.raw.room_audio30, R.raw.sub30));
+	roomNarratives.put(R.drawable.room31, new Pair<Integer, Integer>(R.raw.room_audio31, R.raw.sub31));
+	roomNarratives.put(R.drawable.room32, new Pair<Integer, Integer>(R.raw.room_audio32, R.raw.sub32));
+	roomNarratives.put(R.drawable.room33, new Pair<Integer, Integer>(R.raw.room_audio33, R.raw.sub33));
+	roomNarratives.put(R.drawable.room34, new Pair<Integer, Integer>(R.raw.room_audio34, R.raw.sub34));
+	roomNarratives.put(R.drawable.room35, new Pair<Integer, Integer>(R.raw.room_audio35, R.raw.sub35));
+	roomNarratives.put(R.drawable.room36, new Pair<Integer, Integer>(R.raw.room_audio36, R.raw.sub36));
+	roomNarratives.put(R.drawable.room37, new Pair<Integer, Integer>(R.raw.room_audio37, R.raw.sub37));
+	roomNarratives.put(R.drawable.room38, new Pair<Integer, Integer>(R.raw.room_audio38, R.raw.sub38));
+	roomNarratives.put(R.drawable.room39, new Pair<Integer, Integer>(R.raw.room_audio39, R.raw.sub39));
+	roomNarratives.put(R.drawable.room40, new Pair<Integer, Integer>(R.raw.room_audio40, R.raw.sub40));
+	roomNarratives.put(R.drawable.room41, new Pair<Integer, Integer>(R.raw.room_audio41, R.raw.sub41));
+	roomNarratives.put(R.drawable.room42, new Pair<Integer, Integer>(R.raw.room_audio42, R.raw.sub42));
+	roomNarratives.put(R.drawable.room43, new Pair<Integer, Integer>(R.raw.room_audio43, R.raw.sub43));
+	roomNarratives.put(R.drawable.room44, new Pair<Integer, Integer>(R.raw.room_audio44, R.raw.sub44));
+	roomNarratives.put(R.drawable.room45, new Pair<Integer, Integer>(R.raw.room_audio45, R.raw.sub45));
+	
+	return roomNarratives;
+}
+
+// Get our initialized media file map
+Map<Integer, Pair<Integer, Integer>> roomNarratives = mediaFileInit();
+
 
 @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -43,11 +120,30 @@ public class MainActivity extends Activity
        iv.setOnTouchListener (this);
     }
     
-    //ImageView im = (ImageView) findViewById(R.id.image_areas);
-    //im.setImageResource(R.drawable.image_map1);
-    //im.setTag(R.drawable.image_map1);
+    // Set captions for room 1 to play when view renders.
+    // Will have to wrap this block in a conditional once user
+    // options panel is created and functional.
+    txtDisplay = (TextView) findViewById(R.id.txtDisplay);
+	mediaPlayer = MediaPlayer.create(this, roomNarratives.get(R.drawable.room1).first);
+	mediaPlayer.start();
+	try {
+		mediaPlayer.addTimedTextSource(getSubtitleFile(roomNarratives.get(R.drawable.room1).second),
+				MediaPlayer.MEDIA_MIMETYPE_TEXT_SUBRIP);
+		int textTrackIndex = findTrackIndexFor(
+				TrackInfo.MEDIA_TRACK_TYPE_TIMEDTEXT, mediaPlayer.getTrackInfo());
+		if (textTrackIndex >= 0) {
+			mediaPlayer.selectTrack(textTrackIndex);
+		} else {
+			Log.w(TAG, "Cannot find text track!");
+		}
+		mediaPlayer.setOnTimedTextListener(this);
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
     
-    toast ("Touch the screen to discover where the regions are.");
+	  
+    
 }
 
 /**
@@ -64,33 +160,24 @@ public boolean onTouch (View v, MotionEvent ev)
 
     final int evX = (int) ev.getX();
     final int evY = (int) ev.getY();
-    //int nextImage = -1;			// resource id of the next image to display
 
     // If we cannot find the imageView, return.
     ImageView imageView = (ImageView) v.findViewById(R.id.image);
     ImageView imageMap = (ImageView) findViewById(R.id.image_areas);
     if (imageView == null) return false;
+    
+    
 
     // When the action is Down, see if we should show the "pressed" image for the default image.
     // We do this when the default image is showing. That condition is detectable by looking at the
     // tag of the view. If it is null or contains the resource number of the default image, display the pressed image.
-    //Integer tagNum = (Integer) imageView.getTag ();
-    //int currentResource = (tagNum == null) ? R.drawable.room1 : tagNum.intValue ();
+
 
     // Now that we know the current resource being displayed we can handle the DOWN and UP events.
 
     switch (action) {
     case MotionEvent.ACTION_DOWN :
-       //if (currentResource == R.drawable.room1) {
-         // nextImage = R.drawable.room20;
-         // handledHere = true;
-       /*
-       } else if (currentResource != R.drawable.p2_ship_default) {
-         nextImage = R.drawable.p2_ship_default;
-         handledHere = true;
-       */
-      // } else handledHere = true;
-       //break;
+
 
     case MotionEvent.ACTION_UP :
        // On the UP, we do the click action.
@@ -128,6 +215,7 @@ private void getNextRoom(ImageView view, ImageView map, String color) {
 	//now we set our rooms
 	// <R.drawable.room#, map<color, pair<associatedRoom#. associatedRoomMap#>>>
 	SparseArray<Map<String, Pair<Integer, Integer>>> rooms = new SparseArray<Map<String, Pair<Integer, Integer>>>();
+	
 	
 
 	//room 1
@@ -452,16 +540,15 @@ private void getNextRoom(ImageView view, ImageView map, String color) {
 	rooms.put(R.drawable.room44, room44);
 	rooms.put(R.drawable.room45, room45);
 	
-	//ImageView cr = (ImageView) view;
-	//ImageView cm = (ImageView) map;
+
 	Integer curRoom = (Integer) view.getTag();
-	//Integer curMap = (Integer) cm.getTag();
 	curRoom = (curRoom == null) ? 0 : curRoom;
-	//curMap = (cm == null) ? 0 : curMap;
+	Integer destRoom = rooms.get(curRoom).get(color).first;
+	
 	
 	//error check
 	//check if our room exists, and that there's something mapped to that color
-	if(rooms.get(curRoom) != null && rooms.get(curRoom).get(color) != null)
+	if(rooms.get(curRoom) != null && rooms.get(curRoom).get(color) != null && destRoom != null)
 	{
 		//first is room image
 		view.setImageResource(rooms.get(curRoom).get(color).first);
@@ -469,10 +556,28 @@ private void getNextRoom(ImageView view, ImageView map, String color) {
 		//second is image map
 		map.setImageResource(rooms.get(curRoom).get(color).second);
 		map.setTag(rooms.get(curRoom).get(color).second);
-	}
-	else
-	{
-		toast("This room has not been implemented yet!");		
+		
+		// Set captions and audio
+		// We will have to wrap this block in a conditional once
+		// the user options panel is created and functional
+		mediaPlayer.release();
+		mediaPlayer = MediaPlayer.create(this, roomNarratives.get(destRoom).first);
+		mediaPlayer.start();
+		try {
+			mediaPlayer.addTimedTextSource(getSubtitleFile(roomNarratives.get(destRoom).second),
+					MediaPlayer.MEDIA_MIMETYPE_TEXT_SUBRIP);
+			int textTrackIndex = findTrackIndexFor(
+					TrackInfo.MEDIA_TRACK_TYPE_TIMEDTEXT, mediaPlayer.getTrackInfo());
+			if (textTrackIndex >= 0) {
+				mediaPlayer.selectTrack(textTrackIndex);
+			} else {
+				Log.w(TAG, "Cannot find text track! The poor bastard that coded this must be an idiot!");
+			}
+			mediaPlayer.setOnTimedTextListener(this);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
 
@@ -510,6 +615,79 @@ public void toast (String msg)
 {
     Toast.makeText (getApplicationContext(), msg, Toast.LENGTH_LONG).show ();
 } // end toast
+
+public int findTrackIndexFor(int mediaTrackType, TrackInfo[] trackInfo) {
+	int index = -1;
+	for (int i = 0; i < trackInfo.length; i++) {
+		if (trackInfo[i].getTrackType() == mediaTrackType) {
+			return i;
+		}
+	}
+	return index;
+}
+
+public String getSubtitleFile(int resId) {
+	String fileName = getResources().getResourceEntryName(resId);
+	File subtitleFile = getFileStreamPath(fileName);
+	if (subtitleFile.exists()) {
+		Log.d(TAG, "Subtitle already exists");
+		return subtitleFile.getAbsolutePath();
+	}
+	Log.d(TAG, "Subtitle does not exists, copy it from res/raw");
+
+	// Copy the file from the res/raw folder to app folder on the
+	// device
+	InputStream inputStream = null;
+	OutputStream outputStream = null;
+	try {
+		inputStream = getResources().openRawResource(resId);
+		outputStream = new FileOutputStream(subtitleFile, false);
+		copyFile(inputStream, outputStream);
+		return subtitleFile.getAbsolutePath();
+	} catch (Exception e) {
+		e.printStackTrace();
+	} finally {
+		closeStreams(inputStream, outputStream);
+	}
+	return "";
+}
+
+public void copyFile(InputStream inputStream, OutputStream outputStream)
+		throws IOException {
+	final int BUFFER_SIZE = 1024;
+	byte[] buffer = new byte[BUFFER_SIZE];
+	int length = -1;
+	while ((length = inputStream.read(buffer)) != -1) {
+		outputStream.write(buffer, 0, length);
+	}
+}
+
+
+public void closeStreams(Closeable... closeables) {
+	if (closeables != null) {
+		for (Closeable stream : closeables) {
+			if (stream != null) {
+				try {
+					stream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+}
+
+@Override
+public void onTimedText(final MediaPlayer mp, final TimedText text) {
+	if (text != null) {
+		handler.post(new Runnable() {
+			@Override
+			public void run() {
+				txtDisplay.setText(text.getText());
+			}
+		});
+	}
+}
 
 } // end class
 

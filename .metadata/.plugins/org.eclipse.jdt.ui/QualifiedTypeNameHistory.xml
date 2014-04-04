@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="com.maze_test.R.drawable"/>
+<fullyQualifiedTypeName name="android.content.res.AssetFileDescriptor"/>
+<fullyQualifiedTypeName name="java.io.FileDescriptor"/>
+<fullyQualifiedTypeName name="com.maze_test.R.raw"/>
+<fullyQualifiedTypeName name="android.net.Uri"/>
 </qualifiedTypeNameHistroy>
