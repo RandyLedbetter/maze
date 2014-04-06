@@ -195,7 +195,6 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 		       if(!counter.isFull())
 		    	   counter.increment();
 		       
-		    	   
 		      
 		       if (ct.closeMatch (Color.RED, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "RED"); state=true; toast("RED true");}
 		       else if (ct.closeMatch (Color.BLUE, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "BLUE"); state = true; toast("BLUE true");}
