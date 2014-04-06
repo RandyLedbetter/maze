@@ -11,7 +11,7 @@
 	 android:scaleType="fitCenter"
 	 android:visibility="invisible"
 	 android:contentDescription="@string/desc"
-	 android:src="@drawable/image_map1" 
+	 android:src="@drawable/image_map0" 
 	 />
 	 <ImageView
 	 android:id="@+id/image"
@@ -19,7 +19,7 @@
 	 android:layout_height="fill_parent" 
 	 android:scaleType="fitCenter"
 	 android:contentDescription="@string/desc"
-	 android:src="@drawable/room1"
+	 android:src="@drawable/room0"
 	 />
 	 <TextView
       android:id="@+id/txtDisplay"

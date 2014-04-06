@@ -55,6 +55,7 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 		Map<Integer, Pair<Integer, Integer>> roomNarratives = new HashMap<Integer, Pair<Integer, Integer>>();
 		
 		// Add corresponding audio and caption files to the media file map
+		roomNarratives.put(R.drawable.room0, new Pair<Integer, Integer>(R.raw.room_audio0, R.raw.sub0));
 		roomNarratives.put(R.drawable.room1, new Pair<Integer, Integer>(R.raw.room_audio1, R.raw.sub1));
 		roomNarratives.put(R.drawable.room2, new Pair<Integer, Integer>(R.raw.room_audio2, R.raw.sub2));
 		roomNarratives.put(R.drawable.room3, new Pair<Integer, Integer>(R.raw.room_audio3, R.raw.sub3));
@@ -108,13 +109,14 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 	Map<Integer, Pair<Integer, Integer>> roomNarratives = mediaFileInit();
 	
 	
-	@Override public void onCreate(Bundle savedInstanceState) {
+		@Override 
+		public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.activity_main);
 	
 	    ImageView iv = (ImageView) findViewById (R.id.image);
-	    iv.setImageResource(R.drawable.room1);
-	    iv.setTag(R.drawable.room1);
+	    iv.setImageResource(R.drawable.room0);
+	    iv.setTag(R.drawable.room0);
 	    if (iv != null) {
 	       iv.setOnTouchListener (this);
 	    }
@@ -123,10 +125,11 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 	    // Will have to wrap this block in a conditional once user
 	    // options panel is created and functional.
 	    txtDisplay = (TextView) findViewById(R.id.txtDisplay);
-		mediaPlayer = MediaPlayer.create(this, roomNarratives.get(R.drawable.room1).first);
+		mediaPlayer = MediaPlayer.create(this, roomNarratives.get(R.drawable.room0).first);
 		mediaPlayer.start();
+		
 		try {
-			mediaPlayer.addTimedTextSource(getSubtitleFile(roomNarratives.get(R.drawable.room1).second),
+			mediaPlayer.addTimedTextSource(getSubtitleFile(roomNarratives.get(R.drawable.room0).second),
 					MediaPlayer.MEDIA_MIMETYPE_TEXT_SUBRIP);
 			int textTrackIndex = findTrackIndexFor(
 					TrackInfo.MEDIA_TRACK_TYPE_TIMEDTEXT, mediaPlayer.getTrackInfo());
@@ -191,18 +194,19 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 		       // varying pixel density.
 		       ColorTool ct = new ColorTool ();
 		       int tolerance = 25;
+		       
 		       //check to make sure counter is not at max int value
-		       if(!counter.isFull())
-		    	   counter.increment();
+		       
+		       
 		       
 		      
-		       if (ct.closeMatch (Color.RED, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "RED"); state=true; toast("RED true");}
-		       else if (ct.closeMatch (Color.BLUE, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "BLUE"); state = true; toast("BLUE true");}
-		       else if (ct.closeMatch (Color.WHITE, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "WHITE"); state = true; toast("WHITE true");}
-		       else if (ct.closeMatch (Color.CYAN, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "CYAN"); state = true; toast("CYAN true");}
-		       else if (ct.closeMatch (Color.YELLOW, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "YELLOW"); state = true; toast("YELLOW true");}
-		       else if (ct.closeMatch (Color.MAGENTA, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "MAGENTA"); state = true; toast("MAGENTA true");}
-		       else if (ct.closeMatch (Color.GREEN, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "GREEN"); state = true; toast("GREEN true");}
+		       if (ct.closeMatch (Color.RED, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "RED"); state=true; counter.increment(); toast("RED true");}
+		       else if (ct.closeMatch (Color.BLUE, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "BLUE"); state = true; counter.increment(); toast("BLUE true");}
+		       else if (ct.closeMatch (Color.WHITE, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "WHITE"); state = true; counter.increment(); toast("WHITE true");}
+		       else if (ct.closeMatch (Color.CYAN, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "CYAN"); state = true; counter.increment(); toast("CYAN true");}
+		       else if (ct.closeMatch (Color.YELLOW, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "YELLOW"); state = true; counter.increment(); toast("YELLOW true");}
+		       else if (ct.closeMatch (Color.MAGENTA, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "MAGENTA"); state = true; counter.increment(); toast("MAGENTA true");}
+		       else if (ct.closeMatch (Color.GREEN, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "GREEN"); state = true; counter.increment(); toast("GREEN true");}
 		       
 		       toast("Total Moves:" + counter.total());
 		
@@ -226,7 +230,10 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 		SparseArray<Map<String, Pair<Integer, Integer>>> rooms = new SparseArray<Map<String, Pair<Integer, Integer>>>();
 		
 		
-	
+		//room 0
+		Map<String, Pair<Integer, Integer>> room0 = new HashMap<String, Pair<Integer, Integer>>();
+		room0.put("BLUE", new Pair<Integer, Integer>(R.drawable.room1, R.drawable.image_map1));
+		
 		//room 1
 		Map<String, Pair<Integer, Integer>> room1 = new HashMap<String, Pair<Integer, Integer>>();
 		room1.put("BLUE", new Pair<Integer, Integer>(R.drawable.room20, R.drawable.image_map20));
@@ -503,6 +510,7 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 		room45.put("WHITE", new Pair<Integer, Integer>(R.drawable.room23, R.drawable.image_map23));
 		
 		//now add our room relations to the main room map!
+		rooms.put(R.drawable.room0, room0);
 		rooms.put(R.drawable.room1, room1);
 		rooms.put(R.drawable.room2, room2);
 		rooms.put(R.drawable.room3, room3);
