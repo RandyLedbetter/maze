@@ -110,7 +110,7 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 	
 	
 		@Override 
-		public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.activity_main);
 	
@@ -194,11 +194,6 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 		       // varying pixel density.
 		       ColorTool ct = new ColorTool ();
 		       int tolerance = 25;
-		       
-		       //check to make sure counter is not at max int value
-		       
-		       
-		       
 		      
 		       if (ct.closeMatch (Color.RED, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "RED"); state=true; counter.increment(); toast("RED true");}
 		       else if (ct.closeMatch (Color.BLUE, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "BLUE"); state = true; counter.increment(); toast("BLUE true");}
@@ -220,9 +215,7 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 	}
 	   
 	
-	/**
-	 */
-	// More methods
+
 	
 	private void getNextRoom(ImageView view, ImageView map, String color) {
 		//now we set our rooms
@@ -407,6 +400,7 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 		Map<String, Pair<Integer, Integer>> room29 = new HashMap<String, Pair<Integer, Integer>>();
 		room29.put("CYAN", new Pair<Integer, Integer>(R.drawable.room8, R.drawable.image_map8));
 		room29.put("RED", new Pair<Integer, Integer>(R.drawable.room40, R.drawable.image_map40));
+		room29.put("WHITE", new Pair<Integer, Integer>(R.drawable.room17, R.drawable.image_map17));
 		room29.put("YELLOW", new Pair<Integer, Integer>(R.drawable.room35, R.drawable.image_map35));
 		room29.put("BLUE", new Pair<Integer, Integer>(R.drawable.room2, R.drawable.image_map2));
 		
@@ -628,8 +622,7 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 	 * @return void
 	 */
 	
-	public void toast (String msg)
-	{
+	public void toast (String msg) {
 	    Toast.makeText (getApplicationContext(), msg, Toast.LENGTH_LONG).show ();
 	} // end toast
 	
