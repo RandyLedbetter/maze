@@ -141,13 +141,13 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 		       ColorTool ct = new ColorTool ();
 		       int tolerance = 25;
 		      
-		       if (ct.closeMatch (Color.RED, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "RED"); state=true; counter.increment(); toast("RED true");}
-		       else if (ct.closeMatch (Color.BLUE, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "BLUE"); state = true; counter.increment(); toast("BLUE true");}
-		       else if (ct.closeMatch (Color.WHITE, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "WHITE"); state = true; counter.increment(); toast("WHITE true");}
-		       else if (ct.closeMatch (Color.CYAN, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "CYAN"); state = true; counter.increment(); toast("CYAN true");}
-		       else if (ct.closeMatch (Color.YELLOW, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "YELLOW"); state = true; counter.increment(); toast("YELLOW true");}
-		       else if (ct.closeMatch (Color.MAGENTA, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "MAGENTA"); state = true; counter.increment(); toast("MAGENTA true");}
-		       else if (ct.closeMatch (Color.GREEN, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "GREEN"); state = true; counter.increment(); toast("GREEN true");}
+		       if (ct.closeMatch (Color.RED, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "RED"); state=true; counter.increment();}
+		       else if (ct.closeMatch (Color.BLUE, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "BLUE"); state = true; counter.increment();}
+		       else if (ct.closeMatch (Color.WHITE, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "WHITE"); state = true; counter.increment();}
+		       else if (ct.closeMatch (Color.CYAN, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "CYAN"); state = true; counter.increment();}
+		       else if (ct.closeMatch (Color.YELLOW, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "YELLOW"); state = true; counter.increment();}
+		       else if (ct.closeMatch (Color.MAGENTA, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "MAGENTA"); state = true; counter.increment();}
+		       else if (ct.closeMatch (Color.GREEN, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "GREEN"); state = true; counter.increment();}
 		       
 		       toast("Total Moves:" + counter.total());
 		
