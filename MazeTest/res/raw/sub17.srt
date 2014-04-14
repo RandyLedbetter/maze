@@ -21,9 +21,7 @@ One should never accept the obvious here. If you think of the Maze as a machine,
 
 
 6
-00:00:31,000 --> 00:00:36,000
+00:00:31,000 --> 00:00:45,000
 Ignoring my good advice they hurried into...
 
 
-7
-00:00:38,000 --> 00:00:43,000

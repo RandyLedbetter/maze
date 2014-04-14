@@ -1,0 +1,15 @@
+<resources>
+
+    <!--
+         Customize dimensions originally defined in res/values/dimens.xml (such as
+         screen margins) for sw600dp devices (e.g. 7" tablets) here.
+    -->
+        <dimen name="font_size">24sp</dimen>
+    <dimen name="captions_left_margin">250dp</dimen>
+    <dimen name="captions_right_margin">110dp</dimen>
+    <dimen name="captions_bottom_margin">30dp</dimen>
+    <dimen name="captions_height">100dp</dimen>
+    
+    
+
+</resources>

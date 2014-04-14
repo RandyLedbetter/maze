@@ -25,18 +25,20 @@
       android:id="@+id/txtDisplay"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:height="45dp"
-      android:minHeight="45dp"
-      android:maxHeight="45dp"
+      android:minHeight="@dimen/captions_height"
+      android:maxHeight="@dimen/captions_height"
       android:layout_gravity="bottom"
-      android:layout_marginBottom="25dp"
-      android:layout_marginLeft="130dp"
-      android:layout_marginRight="60dp"
+      android:layout_marginLeft="@dimen/captions_left_margin"
+      android:layout_marginRight="@dimen/captions_right_margin"
+      android:layout_marginBottom="@dimen/captions_bottom_margin"
       android:background="#BB000000"
+      android:textSize="@dimen/font_size"
       android:textColor="#FFFFFF"
       android:padding="5dp"
-      android:textSize="10sp"
       android:typeface="sans"
       android:text="@string/captions" />
+	 
+
+ 
 
 </FrameLayout>

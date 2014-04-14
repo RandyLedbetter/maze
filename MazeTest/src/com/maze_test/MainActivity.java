@@ -8,11 +8,15 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.media.MediaPlayer.OnTimedTextListener;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Pair;
 import android.util.SparseArray;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -27,6 +31,7 @@ import com.maze_test.R;
 
 
 import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.TrackInfo;
 import android.media.TimedText;
 import android.os.Handler;
@@ -51,6 +56,10 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 	private RoomMap roomsMap;
 	private Map<Integer, Pair<Integer, Integer>> roomNarratives;
 	private SparseArray<Map<String, Pair<Integer, Integer>>> rooms;
+
+	
+
+	
 		@Override 
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
@@ -71,24 +80,13 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 	    // Set captions for room 1 to play when view renders.
 	    // Will have to wrap this block in a conditional once user
 	    // options panel is created and functional.
+		
+		
+		
 	    txtDisplay = (TextView) findViewById(R.id.txtDisplay);
+	    txtDisplay.setVisibility(txtDisplay.INVISIBLE);
 	    mediaPlayer = MediaPlayer.create(this, roomNarratives.get(R.drawable.room0).first);
 		mediaPlayer.start();
-		try {
-			mediaPlayer.addTimedTextSource(getSubtitleFile(roomNarratives.get(R.drawable.room0).second),
-					MediaPlayer.MEDIA_MIMETYPE_TEXT_SUBRIP);
-			int textTrackIndex = findTrackIndexFor(
-					TrackInfo.MEDIA_TRACK_TYPE_TIMEDTEXT, mediaPlayer.getTrackInfo());
-			if (textTrackIndex >= 0) {
-				mediaPlayer.selectTrack(textTrackIndex);
-			} else {
-				Log.w(TAG, "Cannot find text track!");
-			}
-			mediaPlayer.setOnTimedTextListener(this);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	    
 		  
 	    
@@ -149,7 +147,10 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 		       else if (ct.closeMatch (Color.MAGENTA, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "MAGENTA"); state = true; counter.increment();}
 		       else if (ct.closeMatch (Color.GREEN, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "GREEN"); state = true; counter.increment();}
 		       
-		       toast("Total Moves:" + counter.total());
+		       
+		       Toast toast = Toast.makeText(this,"Total Moves:" + counter.total(), Toast.LENGTH_SHORT);
+		       toast.setGravity(Gravity.TOP|Gravity.CENTER, 0, 0);
+		       toast.show();
 		
 		
 		
@@ -190,6 +191,13 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 			// the user options panel is created and functional
 			mediaPlayer.release();
 			mediaPlayer = MediaPlayer.create(this, roomNarratives.get(destRoom).first);
+			txtDisplay.setVisibility(View.VISIBLE);
+			mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
+		        public void onCompletion(MediaPlayer mp) {
+		        	// After media file ends, hide captions background box
+		    		txtDisplay.setVisibility(txtDisplay.INVISIBLE);
+		        }
+		    });
 			mediaPlayer.start();
 			try {
 				mediaPlayer.addTimedTextSource(getSubtitleFile(roomNarratives.get(destRoom).second),

@@ -1,0 +1,9 @@
+<resources>
+    <dimen name="font_size">20sp</dimen>
+    <dimen name="captions_left_margin">250dp</dimen>
+    <dimen name="captions_right_margin">80dp</dimen>
+    <dimen name="captions_bottom_margin">20dp</dimen>
+    <dimen name="captions_height">100dp</dimen>
+
+
+</resources>
