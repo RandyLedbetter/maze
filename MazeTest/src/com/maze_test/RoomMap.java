@@ -352,16 +352,16 @@ public class RoomMap {
 	roomNarratives = new HashMap<Integer, Pair<Integer, Integer>>();
 	
 	// Add corresponding audio and caption files to the media file map
-	roomNarratives.put(R.drawable.room0, new Pair<Integer, Integer>(R.raw.room_audio0, R.raw.sub0));
-	roomNarratives.put(R.drawable.room1, new Pair<Integer, Integer>(R.raw.room_audio1, R.raw.sub1));
-	roomNarratives.put(R.drawable.room2, new Pair<Integer, Integer>(R.raw.room_audio2, R.raw.sub2));
-	roomNarratives.put(R.drawable.room3, new Pair<Integer, Integer>(R.raw.room_audio3, R.raw.sub3));
-	roomNarratives.put(R.drawable.room4, new Pair<Integer, Integer>(R.raw.room_audio4, R.raw.sub4));
-	roomNarratives.put(R.drawable.room5, new Pair<Integer, Integer>(R.raw.room_audio5, R.raw.sub5));
-	roomNarratives.put(R.drawable.room6, new Pair<Integer, Integer>(R.raw.room_audio6, R.raw.sub6));
-	roomNarratives.put(R.drawable.room7, new Pair<Integer, Integer>(R.raw.room_audio7, R.raw.sub7));
-	roomNarratives.put(R.drawable.room8, new Pair<Integer, Integer>(R.raw.room_audio8, R.raw.sub8));
-	roomNarratives.put(R.drawable.room9, new Pair<Integer, Integer>(R.raw.room_audio9, R.raw.sub9));
+	roomNarratives.put(R.drawable.room0, new Pair<Integer, Integer>(R.raw.room_audio00, R.raw.sub0));
+	roomNarratives.put(R.drawable.room1, new Pair<Integer, Integer>(R.raw.room_audio01, R.raw.sub1));
+	roomNarratives.put(R.drawable.room2, new Pair<Integer, Integer>(R.raw.room_audio02, R.raw.sub2));
+	roomNarratives.put(R.drawable.room3, new Pair<Integer, Integer>(R.raw.room_audio03, R.raw.sub3));
+	roomNarratives.put(R.drawable.room4, new Pair<Integer, Integer>(R.raw.room_audio04, R.raw.sub4));
+	roomNarratives.put(R.drawable.room5, new Pair<Integer, Integer>(R.raw.room_audio05, R.raw.sub5));
+	roomNarratives.put(R.drawable.room6, new Pair<Integer, Integer>(R.raw.room_audio06, R.raw.sub6));
+	roomNarratives.put(R.drawable.room7, new Pair<Integer, Integer>(R.raw.room_audio07, R.raw.sub7));
+	roomNarratives.put(R.drawable.room8, new Pair<Integer, Integer>(R.raw.room_audio08, R.raw.sub8));
+	roomNarratives.put(R.drawable.room9, new Pair<Integer, Integer>(R.raw.room_audio09, R.raw.sub9));
 	roomNarratives.put(R.drawable.room10, new Pair<Integer, Integer>(R.raw.room_audio10, R.raw.sub10));
 	roomNarratives.put(R.drawable.room11, new Pair<Integer, Integer>(R.raw.room_audio11, R.raw.sub11));
 	roomNarratives.put(R.drawable.room12, new Pair<Integer, Integer>(R.raw.room_audio12, R.raw.sub12));

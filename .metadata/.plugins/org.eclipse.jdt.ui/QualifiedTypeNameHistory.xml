@@ -5,4 +5,5 @@
 <fullyQualifiedTypeName name="java.io.FileDescriptor"/>
 <fullyQualifiedTypeName name="com.maze_test.R.raw"/>
 <fullyQualifiedTypeName name="android.net.Uri"/>
+<fullyQualifiedTypeName name="android.media.MediaPlayer.OnCompletionListener"/>
 </qualifiedTypeNameHistroy>
