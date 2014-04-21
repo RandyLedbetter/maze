@@ -38,7 +38,7 @@ public class OptionsFragment extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialog, int id) {
             }
-        });;
+        });
 		
 		
 		

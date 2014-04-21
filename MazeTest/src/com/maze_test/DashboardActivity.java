@@ -1,6 +1,10 @@
 package com.maze_test;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -72,6 +76,8 @@ implements View.OnTouchListener {
 		   		//imageMap.setImageResource(R.drawable.image_map1);
 		   		//imageMap.setTag(R.drawable.image_map1); 
 	    	   state=true; 
+	    	   Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
+	    	   startActivity(intent);
 	    	   toast("Pressed the Door Hotspot");	    	   
 	       }
 
@@ -129,7 +135,47 @@ implements View.OnTouchListener {
  
 			@Override
 			public void onClick(View arg0) {
- 
+				ArrayList selectedItems;
+				selectedItems = new ArrayList();
+				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DashboardActivity.this);
+		 
+				// set title
+				alertDialogBuilder.setTitle("Your Title");
+				
+				// set dialog message
+				alertDialogBuilder.setTitle(R.string.options_menu).setMultiChoiceItems(R.array.options, null, new DialogInterface.OnMultiChoiceClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which,
+		                    boolean isChecked) {
+		                /*if (isChecked) {
+		                    // If the user checked the item, add it to the selected items
+		                    selectedItems.add(which);
+		                } else if (selectedItems.contains(which)) {
+		                    // Else, if the item is already in the array, remove it 
+		                    selectedItems.remove(Integer.valueOf(which));
+		                }*/
+		            }
+				})    // Set the action buttons
+		        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+		            @Override
+		            public void onClick(DialogInterface dialog, int id) {
+		                // User clicked OK, so save the mSelectedItems results somewhere
+		                // or return them to the component that opened the dialog
+		            }
+		        })
+		        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+		            @Override
+		            public void onClick(DialogInterface dialog, int id) {
+		            }
+		        });
+	 
+					// create alert dialog
+					AlertDialog alertDialog = alertDialogBuilder.create();
+	 
+					// show it
+					alertDialog.show();
+								
+				
 				Toast.makeText(DashboardActivity.this,
 					"Options Button Pressed",
 					Toast.LENGTH_SHORT).show();
