@@ -18,8 +18,7 @@
 	 android:layout_height="fill_parent" 
 	 android:scaleType="fitCenter"
 	 android:contentDescription="@string/desc"
-	 android:src="@drawable/dashboard"
-	 />
+	 android:src="@drawable/dashboard" />
 
 	 <LinearLayout
 	     android:layout_width="wrap_content"
