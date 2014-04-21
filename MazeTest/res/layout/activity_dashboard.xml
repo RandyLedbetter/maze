@@ -1,0 +1,81 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools"
+	 android:id="@+id/my_frame"
+	 android:layout_width="fill_parent"
+	 android:layout_height="fill_parent" >
+	<ImageView 
+	 android:id="@+id/image_areas"
+	 android:layout_width="fill_parent" 
+	 android:layout_height="fill_parent" 
+	 android:scaleType="fitCenter"
+	 android:visibility="invisible"
+	 android:contentDescription="@string/desc"
+	 android:src="@drawable/image_map_dashboard"/>
+	
+	 <ImageView
+	 android:id="@+id/image"
+	 android:layout_width="fill_parent" 
+	 android:layout_height="fill_parent" 
+	 android:scaleType="fitCenter"
+	 android:contentDescription="@string/desc"
+	 android:src="@drawable/dashboard"
+	 />
+
+	 <LinearLayout
+	     android:layout_width="wrap_content"
+	     android:layout_height="95dp"
+	     android:layout_gravity="right|center"
+	     android:layout_margin="8dp"
+	     android:orientation="vertical" >
+        
+	     <Button
+	         android:id="@+id/enter_maze_button"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:layout_marginBottom="10dp"
+	         android:background="@drawable/enter_maze_button"
+	         android:scaleType="fitXY" />
+	     
+	     <Button
+	     android:id="@+id/resume_button"
+	     android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:background="@drawable/resume_button"
+	     android:scaleType="fitXY"
+	     android:visibility="visible" />
+
+        
+        </LinearLayout>
+
+	 <LinearLayout
+	     android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:layout_gravity="left|center"
+	     android:layout_marginBottom="4dp"
+	     android:orientation="vertical" >
+
+	     <Button
+	         android:id="@+id/options_button"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:layout_marginBottom="30dp"
+	         android:background="@drawable/options_button"
+	         android:scaleType="fitXY" />
+
+	     <Button
+	         android:id="@+id/credits_button"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:layout_marginBottom="30dp"
+	         android:background="@drawable/credits_button"
+	         android:scaleType="fitXY" />
+
+	     <Button
+	         android:id="@+id/directions_button"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:background="@drawable/directions_button"
+	         android:scaleType="fitXY" />
+	 </LinearLayout>
+
+</FrameLayout>
