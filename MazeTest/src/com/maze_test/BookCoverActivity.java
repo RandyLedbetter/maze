@@ -29,7 +29,7 @@ public class BookCoverActivity extends Activity{
 	            	finish();
 	                Intent i = new Intent();
 	                i.setClassName("com.maze_test",
-	                               "com.maze_test.MainActivity");
+	                               "com.maze_test.DashboardActivity");
 	                startActivity(i);
 	            }
 	        }

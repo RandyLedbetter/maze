@@ -1,7 +1,7 @@
 package com.maze_test;
 
-import android.widget.Button;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -95,7 +96,8 @@ implements View.OnTouchListener {
  
 			@Override
 			public void onClick(View arg0) {
- 
+				Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
+				startActivity(intent);
 				Toast.makeText(DashboardActivity.this,
 					"Enter Maze Button Pressed",
 					Toast.LENGTH_SHORT).show();
