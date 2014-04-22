@@ -20,6 +20,18 @@
 			android:configChanges="keyboardHidden|orientation" >
 		</activity>
 		<activity
+			android:name="com.maze_test.CreditsActivity"
+			android:label="@string/app_name"
+			android:screenOrientation="landscape" 
+			android:configChanges="keyboardHidden|orientation" >
+		</activity>
+		<activity
+			android:name="com.maze_test.DirectionsActivity"
+			android:label="@string/app_name"
+			android:screenOrientation="landscape" 
+			android:configChanges="keyboardHidden|orientation" >
+		</activity>
+		<activity
 			android:name="com.maze_test.DashboardActivity"
 			android:label="@string/app_name"
 			android:screenOrientation="landscape"

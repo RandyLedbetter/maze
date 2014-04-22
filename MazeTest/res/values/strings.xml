@@ -8,5 +8,12 @@
     <string name="options_menu">Options</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="author">Author: Christopher Manson</string>
+    <string name="publisher">Publisher: Henry Holt and Company - 1985</string>
+    <string name="developer1">Randy Ledbetter</string>
+    <string name="developer2">Taylor Carrington</string>
+    <string name="developer3">Jayd Saucedo</string>
+    <string name="developers">Developers:</string>
+    <string name="directions">directions go here.</string>
 
 </resources>

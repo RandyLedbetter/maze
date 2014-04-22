@@ -145,8 +145,7 @@ implements View.OnTouchListener {
 				// set dialog message
 				alertDialogBuilder.setTitle(R.string.options_menu).setMultiChoiceItems(R.array.options, null, new DialogInterface.OnMultiChoiceClickListener() {
 					@Override
-					public void onClick(DialogInterface dialog, int which,
-		                    boolean isChecked) {
+					public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 		                /*if (isChecked) {
 		                    // If the user checked the item, add it to the selected items
 		                    selectedItems.add(which);
@@ -169,11 +168,11 @@ implements View.OnTouchListener {
 		            }
 		        });
 	 
-					// create alert dialog
-					AlertDialog alertDialog = alertDialogBuilder.create();
-	 
-					// show it
-					alertDialog.show();
+				// create alert dialog
+				AlertDialog alertDialog = alertDialogBuilder.create();
+ 
+				// show it
+				alertDialog.show();
 								
 				
 				Toast.makeText(DashboardActivity.this,
@@ -191,7 +190,8 @@ implements View.OnTouchListener {
  
 			@Override
 			public void onClick(View arg0) {
- 
+				Intent intent = new Intent(DashboardActivity.this, CreditsActivity.class);
+				startActivity(intent);
 				Toast.makeText(DashboardActivity.this,
 					"Credits Button Pressed",
 					Toast.LENGTH_SHORT).show();
@@ -207,7 +207,8 @@ implements View.OnTouchListener {
  
 			@Override
 			public void onClick(View arg0) {
- 
+				Intent intent = new Intent(DashboardActivity.this, DirectionsActivity.class);
+				startActivity(intent);
 				Toast.makeText(DashboardActivity.this,
 					"Directions Button Pressed",
 					Toast.LENGTH_SHORT).show();
