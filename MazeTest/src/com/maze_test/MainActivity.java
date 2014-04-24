@@ -156,10 +156,10 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 		}
 		
 		
-		counterTotal = Integer.toString(counter.total());
+		counterTotal = Integer.toString(curPath.size());
 	    dashboardCounterButton = (Button)findViewById(R.id.dashboard_counter_button);
 	    dashboardCounterButton.setText(counterTotal);
-	    if( counter.total() == 17 ) { dashboardCounterButton.setTextColor(Color.parseColor("#CC0000")); }
+	    if( curPath.size() == 17 ) { dashboardCounterButton.setTextColor(Color.parseColor("#CC0000")); }
 		
 		addListenerOnButton();
 			  
@@ -234,10 +234,10 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 		      /* Toast toast = Toast.makeText(this,"Total Moves:" + counter.total(), Toast.LENGTH_SHORT);
 		       toast.setGravity(Gravity.TOP|Gravity.CENTER, 0, 0);
 		       toast.show();*/
-		       counterTotal = Integer.toString(counter.total());
+		       counterTotal = Integer.toString(curPath.size());
 		       dashboardCounterButton = (Button)findViewById(R.id.dashboard_counter_button);
 		       dashboardCounterButton.setText(counterTotal);
-		       if( counter.total() == 17 ) { dashboardCounterButton.setTextColor(Color.parseColor("#CC0000")); }
+		       if( curPath.size() == 17 ) { dashboardCounterButton.setTextColor(Color.parseColor("#CC0000")); }
 		
 		
 		
