@@ -41,7 +41,7 @@
 	     android:layout_height="wrap_content"
 	     android:background="@drawable/resume_button"
 	     android:scaleType="fitXY"
-	     android:visibility="visible" />
+	     android:visibility="gone" />
 
         
         </LinearLayout>

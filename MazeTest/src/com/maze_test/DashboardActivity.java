@@ -1,15 +1,23 @@
 package com.maze_test;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Vector;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,17 +36,26 @@ implements View.OnTouchListener {
 	Button optionsButton;
 	Button creditsButton;
 	Button directionsButton;
-
+	private SharedPreferences sharedPref;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dashboard);
+		
+		sharedPref = getBaseContext().getSharedPreferences("path", Context.MODE_PRIVATE);
 		
 		ImageView iv = (ImageView) findViewById (R.id.image);
 	    iv.setImageResource(R.drawable.dashboard);
 	    iv.setTag(R.drawable.dashboard);
 	    if (iv != null) {
 	       iv.setOnTouchListener (this);
+	    }
+	    
+	    if(sharedPref.contains("path"))
+	    {
+	    	resumeButton = (Button) findViewById(R.id.resume_button);
+	    	resumeButton.setVisibility(View.VISIBLE);
 	    }
 	    
 	    addListenerOnButton();
@@ -102,6 +119,11 @@ implements View.OnTouchListener {
  
 			@Override
 			public void onClick(View arg0) {
+				SharedPreferences.Editor prefEditor = sharedPref.edit();
+				prefEditor.clear();
+				//starting a new game, fill path shared pref with empty vector
+				prefEditor.remove("path");
+				prefEditor.commit();
 				Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
 				startActivity(intent);
 				Toast.makeText(DashboardActivity.this,
@@ -123,6 +145,8 @@ implements View.OnTouchListener {
 				Toast.makeText(DashboardActivity.this,
 					"Resume Button Pressed",
 					Toast.LENGTH_SHORT).show();
+					Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
+					startActivity(intent);
  
 			}
  

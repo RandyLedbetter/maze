@@ -2,8 +2,11 @@ package com.maze_test;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.media.MediaPlayer.OnTimedTextListener;
@@ -26,7 +29,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Type;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.maze_test.R;
 
 
@@ -56,7 +62,8 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 	private RoomMap roomsMap;
 	private Map<Integer, Pair<Integer, Integer>> roomNarratives;
 	private SparseArray<Map<String, Pair<Integer, Integer>>> rooms;
-
+	private Vector<Pair<Integer, Integer>> curPath;
+    private SharedPreferences sharedPref;
 	
 
 	
@@ -64,34 +71,72 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.activity_main);
-	
-	    ImageView iv = (ImageView) findViewById (R.id.image);
-	    iv.setImageResource(R.drawable.room0);
-	    iv.setTag(R.drawable.room0);
-	    if (iv != null) {
-	       iv.setOnTouchListener (this);
-	    }
 	    
 		// Get our initialized media file map
 	    roomsMap = new RoomMap();
 		roomNarratives = roomsMap.getNarativeMap();
 		rooms = roomsMap.getRoomMap();
+	   
+		sharedPref = getBaseContext().getSharedPreferences("path", Context.MODE_PRIVATE);
+	    
+	    //load current path
+	    if(sharedPref.contains("path"))
+	    {
+	    	final Type PREF_STORE_TYPE = new TypeToken<Vector<Pair<Integer, Integer>>>() {}.getType();
+	    	String dataAsJson = sharedPref.getString("path", "[]");
+	    	curPath = new Gson().fromJson(dataAsJson, PREF_STORE_TYPE);
+	    	/*this is in case our image resource IDs change (which apparently they sometimes do)
+	    	if(roomNarratives.get(curPath.lastElement().first) == null || rooms.get(curPath.lastElement().first) == null)
+	    	{
+	    		curPath = new Vector<Pair<Integer, Integer>>();
+		    	curPath.add(new Pair<Integer, Integer>(R.drawable.room0, R.drawable.image_map0));
+	    	}
+	    	*/
+	    }
+	    else
+	    {
+	    	curPath = new Vector<Pair<Integer, Integer>>();
+	    	curPath.add(new Pair<Integer, Integer>(R.drawable.room0, R.drawable.image_map0));
+	    }
+	    
+	    ImageView iv = (ImageView) findViewById (R.id.image);
+	    iv.setImageResource(curPath.lastElement().first);
+	    iv.setTag(curPath.lastElement().first);
+	    
+	    ImageView imapv = (ImageView) findViewById (R.id.image_areas);
+	    imapv.setImageResource(curPath.lastElement().second);
+	    
+	    if (iv != null) {
+	       iv.setOnTouchListener (this);
+	    }
+	    Log.e("wiio4", curPath.lastElement().first.toString());
+
 		
 	    // Set captions for room 1 to play when view renders.
 	    // Will have to wrap this block in a conditional once user
 	    // options panel is created and functional.
 		
-		
+	    Log.e("wiio3", curPath.lastElement().first.toString());
 		
 	    txtDisplay = (TextView) findViewById(R.id.txtDisplay);
 	    txtDisplay.setVisibility(txtDisplay.INVISIBLE);
-	    mediaPlayer = MediaPlayer.create(this, roomNarratives.get(R.drawable.room0).first);
+	    Log.e("wiio", curPath.lastElement().first.toString());
+	    mediaPlayer = MediaPlayer.create(this, roomNarratives.get(curPath.lastElement().first).first);
 		mediaPlayer.start();
 	    
 		  
 	    
 	}
-	
+		
+	public void onPause()
+	{
+		super.onPause();
+		//save our preferences
+		SharedPreferences.Editor prefEditor = sharedPref.edit();
+		prefEditor.clear();
+		prefEditor.putString("path", new Gson().toJson(curPath));
+		prefEditor.commit();
+	}
 	/**
 	 * Respond to the user touching the screen.
 	 * Change images to make things appear and disappear from the screen.
@@ -185,6 +230,7 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 			//second is image map
 			map.setImageResource(rooms.get(curRoom).get(color).second);
 			map.setTag(rooms.get(curRoom).get(color).second);
+			curPath.add(new Pair<Integer, Integer>(destRoom, rooms.get(curRoom).get(color).second));
 			
 			// Set captions and audio
 			// We will have to wrap this block in a conditional once
