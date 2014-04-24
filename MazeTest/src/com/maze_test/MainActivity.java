@@ -1,11 +1,15 @@
 package com.maze_test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -18,8 +22,10 @@ import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -64,6 +70,9 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 	private SparseArray<Map<String, Pair<Integer, Integer>>> rooms;
 	private Vector<Pair<Integer, Integer>> curPath;
     private SharedPreferences sharedPref;
+    
+    Button dashboardCounterButton;
+    String counterTotal = Integer.toString(counter.total());
 	
 
 	
@@ -78,6 +87,7 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 		rooms = roomsMap.getRoomMap();
 	   
 		sharedPref = getBaseContext().getSharedPreferences("path", Context.MODE_PRIVATE);
+		
 	    
 	    //load current path
 	    if(sharedPref.contains("path"))
@@ -96,7 +106,9 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 	    else
 	    {
 	    	curPath = new Vector<Pair<Integer, Integer>>();
-	    	curPath.add(new Pair<Integer, Integer>(R.drawable.room0, R.drawable.image_map0));
+	    	curPath.add(new Pair<Integer, Integer>(R.drawable.room1, R.drawable.image_map1));
+	    	
+	    	
 	    }
 	    
 	    ImageView iv = (ImageView) findViewById (R.id.image);
@@ -109,22 +121,48 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 	    if (iv != null) {
 	       iv.setOnTouchListener (this);
 	    }
-	    Log.e("wiio4", curPath.lastElement().first.toString());
-
+	    Log.e("wiio4", curPath.lastElement().first.toString());  
 		
+	    Log.e("wiio3", curPath.lastElement().first.toString());
+	    
+	    
 	    // Set captions for room 1 to play when view renders.
 	    // Will have to wrap this block in a conditional once user
 	    // options panel is created and functional.
-		
-	    Log.e("wiio3", curPath.lastElement().first.toString());
-		
 	    txtDisplay = (TextView) findViewById(R.id.txtDisplay);
-	    txtDisplay.setVisibility(txtDisplay.INVISIBLE);
 	    Log.e("wiio", curPath.lastElement().first.toString());
 	    mediaPlayer = MediaPlayer.create(this, roomNarratives.get(curPath.lastElement().first).first);
+		mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
+	        public void onCompletion(MediaPlayer mp) {
+	        	// After media file ends, hide captions background box
+	    		txtDisplay.setVisibility(View.INVISIBLE);
+	        }
+	    });
 		mediaPlayer.start();
-	    
-		  
+		try {
+			mediaPlayer.addTimedTextSource(getSubtitleFile(roomNarratives.get(curPath.lastElement().first).second),
+					MediaPlayer.MEDIA_MIMETYPE_TEXT_SUBRIP);
+			int textTrackIndex = findTrackIndexFor(
+					TrackInfo.MEDIA_TRACK_TYPE_TIMEDTEXT, mediaPlayer.getTrackInfo());
+			if (textTrackIndex >= 0) {
+				mediaPlayer.selectTrack(textTrackIndex);
+			} else {
+				Log.w(TAG, "Cannot find text track! The poor bastard that coded this must be an idiot!");
+			}
+			mediaPlayer.setOnTimedTextListener(this);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		counterTotal = Integer.toString(counter.total());
+	    dashboardCounterButton = (Button)findViewById(R.id.dashboard_counter_button);
+	    dashboardCounterButton.setText(counterTotal);
+	    if( counter.total() == 17 ) { dashboardCounterButton.setTextColor(Color.parseColor("#CC0000")); }
+		
+		addListenerOnButton();
+			  
 	    
 	}
 		
@@ -193,9 +231,13 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 		       else if (ct.closeMatch (Color.GREEN, touchColor, tolerance)) {getNextRoom(imageView, imageMap, "GREEN"); state = true; counter.increment();}
 		       
 		       
-		       Toast toast = Toast.makeText(this,"Total Moves:" + counter.total(), Toast.LENGTH_SHORT);
+		      /* Toast toast = Toast.makeText(this,"Total Moves:" + counter.total(), Toast.LENGTH_SHORT);
 		       toast.setGravity(Gravity.TOP|Gravity.CENTER, 0, 0);
-		       toast.show();
+		       toast.show();*/
+		       counterTotal = Integer.toString(counter.total());
+		       dashboardCounterButton = (Button)findViewById(R.id.dashboard_counter_button);
+		       dashboardCounterButton.setText(counterTotal);
+		       if( counter.total() == 17 ) { dashboardCounterButton.setTextColor(Color.parseColor("#CC0000")); }
 		
 		
 		
@@ -368,6 +410,25 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 				}
 			});
 		}
+	}
+	
+	public void addListenerOnButton() {
+		
+		
+		// The DashboardCounterButton allows the user to return to the Dashboard Activity.
+		// It also dynamically displays the number of moves the user has made.
+		dashboardCounterButton = (Button) findViewById(R.id.dashboard_counter_button);
+ 
+		dashboardCounterButton.setOnClickListener(new OnClickListener() {
+ 
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+				startActivity(intent);
+			}
+ 
+		});
+		
 	}
 
 } // end class

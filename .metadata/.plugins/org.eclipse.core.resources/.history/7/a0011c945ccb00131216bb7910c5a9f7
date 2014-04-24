@@ -1,0 +1,50 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools"
+	 android:id="@+id/my_frame"
+	 android:layout_width="fill_parent"
+	 android:layout_height="fill_parent"
+	 android:background="@color/background" >
+	<ImageView 
+	 android:id="@+id/image_areas"
+	 android:layout_width="fill_parent" 
+	 android:layout_height="fill_parent" 
+	 android:scaleType="fitCenter"
+	 android:visibility="invisible"
+	 android:contentDescription="@string/desc"
+	 android:src="@drawable/image_map0" 
+	 />
+	 <ImageView
+	 android:id="@+id/image"
+	 android:layout_width="fill_parent" 
+	 android:layout_height="fill_parent" 
+	 android:scaleType="fitCenter"
+	 android:contentDescription="@string/desc"
+	 android:src="@drawable/room0"
+	 />
+	 <TextView
+      android:id="@+id/txtDisplay"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:minHeight="@dimen/captions_height"
+      android:maxHeight="@dimen/captions_height"
+      android:layout_gravity="bottom"
+      android:layout_marginLeft="@dimen/captions_left_margin"
+      android:layout_marginRight="@dimen/captions_right_margin"
+      android:layout_marginBottom="@dimen/captions_bottom_margin"
+      android:background="#BB000000"
+      android:textSize="@dimen/font_size"
+      android:textColor="#FFFFFF"
+      android:padding="5dp"
+      android:typeface="sans"
+      android:text="@string/captions" />
+
+	 <Button
+	     android:id="@+id/dashboard_counter_button"
+	     android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:layout_gravity="bottom"
+	     android:layout_marginBottom="@dimen/captions_bottom_margin"
+	     android:background="@drawable/dashboard_counter_btn"
+	     android:scaleType="fitXY" />
+
+</FrameLayout>
