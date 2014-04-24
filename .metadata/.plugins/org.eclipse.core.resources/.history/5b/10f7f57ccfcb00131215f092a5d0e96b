@@ -1,0 +1,11 @@
+<resources>
+    <dimen name="font_size">24sp</dimen>
+    <dimen name="captions_left_margin">280dp</dimen>
+    <dimen name="captions_right_margin">110dp</dimen>
+    <dimen name="captions_bottom_margin">25dp</dimen>
+    <dimen name="captions_height">100dp</dimen>
+    <dimen name="dashboard_btn_padding_right">40dp</dimen>
+    <dimen name="dashboard_btn_text_size">18sp</dimen>
+
+
+</resources>

@@ -47,11 +47,10 @@
 	     android:background="@drawable/dashboard_counter_btn"
 	     android:gravity="right|center_vertical"
 	     android:paddingBottom="4dp"
-	     android:paddingRight="40dp"
+	     android:paddingRight="@dimen/dashboard_btn_padding_right"
 	     android:scaleType="fitXY"
-	     android:text="0"
 	     android:textColor="#CCC"
-	     android:textSize="18sp"
+	     android:textSize="@dimen/dashboard_btn_text_size"
 	     android:textStyle="bold"
 	     android:typeface="serif" />
 

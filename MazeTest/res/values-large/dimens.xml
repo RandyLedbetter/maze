@@ -4,6 +4,8 @@
     <dimen name="captions_right_margin">110dp</dimen>
     <dimen name="captions_bottom_margin">25dp</dimen>
     <dimen name="captions_height">100dp</dimen>
+    <dimen name="dashboard_btn_padding_right">60dp</dimen>
+    <dimen name="dashboard_btn_text_size">24sp</dimen>
 
 
 </resources>
