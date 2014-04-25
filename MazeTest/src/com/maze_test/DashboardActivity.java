@@ -94,8 +94,7 @@ implements View.OnTouchListener {
 		   		//imageMap.setTag(R.drawable.image_map1); 
 	    	   state=true; 
 	    	   Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
-	    	   startActivity(intent);
-	    	   toast("Pressed the Door Hotspot");	    	   
+	    	   startActivity(intent);	    	   
 	       }
 
 	    default:
@@ -126,9 +125,6 @@ implements View.OnTouchListener {
 				prefEditor.commit();
 				Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
 				startActivity(intent);
-				Toast.makeText(DashboardActivity.this,
-					"Enter Maze Button Pressed",
-					Toast.LENGTH_SHORT).show();
  
 			}
  
@@ -142,11 +138,6 @@ implements View.OnTouchListener {
 			@Override
 			public void onClick(View arg0) {
  
-				Toast.makeText(DashboardActivity.this,
-					"Resume Button Pressed",
-					Toast.LENGTH_SHORT).show();
-					Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
-					startActivity(intent);
  
 			}
  
@@ -197,11 +188,6 @@ implements View.OnTouchListener {
  
 				// show it
 				alertDialog.show();
-								
-				
-				Toast.makeText(DashboardActivity.this,
-					"Options Button Pressed",
-					Toast.LENGTH_SHORT).show();
  
 			}
  
@@ -216,9 +202,6 @@ implements View.OnTouchListener {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(DashboardActivity.this, CreditsActivity.class);
 				startActivity(intent);
-				Toast.makeText(DashboardActivity.this,
-					"Credits Button Pressed",
-					Toast.LENGTH_SHORT).show();
  
 			}
  
@@ -233,9 +216,6 @@ implements View.OnTouchListener {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(DashboardActivity.this, DirectionsActivity.class);
 				startActivity(intent);
-				Toast.makeText(DashboardActivity.this,
-					"Directions Button Pressed",
-					Toast.LENGTH_SHORT).show();
  
 			}
  

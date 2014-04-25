@@ -10,5 +10,7 @@
     <dimen name="captions_height">55dp</dimen>
     <dimen name="dashboard_btn_padding_right">40dp</dimen>
     <dimen name="dashboard_btn_text_size">18sp</dimen>
+    <dimen name="directions_text_size">10sp</dimen>
+    <dimen name="credits_text_size">12sp</dimen>
 
 </resources>

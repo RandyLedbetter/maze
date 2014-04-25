@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MazeTest</string>
+    <string name="action_settings">Settings</string>
+    <string name="desc">Room Image</string>
+    <string name="captions">Captions are not working if you see this string of text.</string>
+    <string name="options_menu">Options</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="author">Author: Christopher Manson</string>
+    <string name="publisher">Publisher: Henry Holt and Company - 1985</string>
+    <string name="developer1">Randy Ledbetter</string>
+    <string name="developer2">Taylor Carrington</string>
+    <string name="developer3">Jayd Saucedo</string>
+    <string name="developers">Developers:</string>
+    <string name="directions1">This is not really a book.\nThis is a virtual space in the shape of a book...a maze. Each numbered page depicts a room in the Maze. The doors in each room lead to other rooms. For example, the room on page 1 has doors leading to rooms 20, 26, 41, and 21. To go through door number 20, simply click on that door.\nYour challenge is to find your way from room 1 (after the Prologue) to room 45 and then back to room 1 using the shortest possible path. If you use your head, you should be able to make the journey in only sixteen steps.\nThere are any number of clues in the drawings and in the story to help you choose the right door in each room. Clues in a series of rooms may relate to one another, and may indicate a path. Other clues may refer to a specific door in a single room.\n</string>
+    <string name="directions2">Anything in this space might be a clue.\nNot all clues are necessarily trustworthy.\nOnce you\'ve found the shortest path in and out of the Maze, challenge yourself further. Go back and find the riddle hidden in room 45. The answer to that riddle is concealed somewhere on the shortest path.\nNow proceed to the Prologue...your guide awaits you.\n</string>
+    <string name="directions_description">This view contains directions for how to win MAZE</string>
+
+</resources>

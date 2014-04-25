@@ -1,0 +1,27 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools"
+	 android:id="@+id/directions_frame"
+	 android:layout_width="fill_parent"
+	 android:layout_height="fill_parent"
+	 android:background="@color/background" >
+	<ImageView 
+	 android:id="@+id/maze_info_background"
+	 android:layout_width="fill_parent" 
+	 android:layout_height="fill_parent" 
+	 android:scaleType="fitCenter"
+	 android:contentDescription="@string/directions_description"
+	 android:src="@drawable/maze_info_background" 
+	 />
+
+ 	<TextView
+ 	    android:layout_width="wrap_content"
+ 	    android:layout_height="wrap_content"
+ 	    android:padding="10dp"
+ 	    android:paddingBottom="0dp"
+ 	    android:layout_margin="20dp"
+ 	    android:text="@string/credits"
+ 	    android:textColor="#5A3627"
+ 	    android:textSize="@dimen/directions_text_size"
+ 	    android:typeface="serif" />
+
+</FrameLayout>
