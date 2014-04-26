@@ -1,11 +1,6 @@
 package com.maze_test;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Vector;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,7 +12,8 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Pair;
+import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,6 +32,7 @@ implements View.OnTouchListener {
 	Button optionsButton;
 	Button creditsButton;
 	Button directionsButton;
+	ArrayList selectedItems;
 	private SharedPreferences sharedPref;
 	
 	@Override
@@ -150,24 +147,23 @@ implements View.OnTouchListener {
  
 			@Override
 			public void onClick(View arg0) {
-				ArrayList selectedItems;
+				
 				selectedItems = new ArrayList();
-				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DashboardActivity.this);
-		 
-				// set title
-				alertDialogBuilder.setTitle("Your Title");
+				ContextThemeWrapper wrapper = new ContextThemeWrapper(DashboardActivity.this, android.R.style.Theme_Holo);
+				final LayoutInflater inflater = (LayoutInflater) wrapper.getSystemService(LAYOUT_INFLATER_SERVICE);
+				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(wrapper);
 				
 				// set dialog message
 				alertDialogBuilder.setTitle(R.string.options_menu).setMultiChoiceItems(R.array.options, null, new DialogInterface.OnMultiChoiceClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-		                /*if (isChecked) {
+		                if (isChecked) {
 		                    // If the user checked the item, add it to the selected items
 		                    selectedItems.add(which);
 		                } else if (selectedItems.contains(which)) {
 		                    // Else, if the item is already in the array, remove it 
 		                    selectedItems.remove(Integer.valueOf(which));
-		                }*/
+		                }
 		            }
 				})    // Set the action buttons
 		        .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
