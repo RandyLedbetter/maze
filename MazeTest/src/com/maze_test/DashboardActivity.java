@@ -32,7 +32,7 @@ implements View.OnTouchListener {
 	Button optionsButton;
 	Button creditsButton;
 	Button directionsButton;
-	ArrayList selectedItems;
+	ArrayList<Integer> selectedItems;
 	private SharedPreferences sharedPref;
 	
 	@Override
@@ -171,6 +171,11 @@ implements View.OnTouchListener {
 		            public void onClick(DialogInterface dialog, int id) {
 		                // User clicked OK, so save the mSelectedItems results somewhere
 		                // or return them to the component that opened the dialog
+		            	
+		            	if(selectedItems.contains(1)){
+		            		//edit shared preferences to save captions on...
+		            		//else do not save shared preferences.
+		            	}
 		            }
 		        })
 		        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
