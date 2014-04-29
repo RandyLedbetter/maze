@@ -86,7 +86,7 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 		roomNarratives = roomsMap.getNarativeMap();
 		rooms = roomsMap.getRoomMap();
 	   
-		sharedPref = getBaseContext().getSharedPreferences("path", Context.MODE_PRIVATE);
+		sharedPref = getBaseContext().getSharedPreferences("maze", Context.MODE_PRIVATE);
 		
 	    
 	    //load current path
@@ -107,8 +107,6 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 	    {
 	    	curPath = new Vector<Pair<Integer, Integer>>();
 	    	curPath.add(new Pair<Integer, Integer>(R.drawable.room1, R.drawable.image_map1));
-	    	
-	    	
 	    }
 	    
 	    ImageView iv = (ImageView) findViewById (R.id.image);
@@ -125,37 +123,39 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 		
 	    Log.e("wiio3", curPath.lastElement().first.toString());
 	    
-	    
-	    // Set captions for room 1 to play when view renders.
-	    // Will have to wrap this block in a conditional once user
-	    // options panel is created and functional.
 	    txtDisplay = (TextView) findViewById(R.id.txtDisplay);
-	    Log.e("wiio", curPath.lastElement().first.toString());
-	    mediaPlayer = MediaPlayer.create(this, roomNarratives.get(curPath.lastElement().first).first);
-		mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
-	        public void onCompletion(MediaPlayer mp) {
-	        	// After media file ends, hide captions background box
-	    		txtDisplay.setVisibility(View.INVISIBLE);
-	        }
-	    });
-		mediaPlayer.start();
-		try {
-			mediaPlayer.addTimedTextSource(getSubtitleFile(roomNarratives.get(curPath.lastElement().first).second),
-					MediaPlayer.MEDIA_MIMETYPE_TEXT_SUBRIP);
-			int textTrackIndex = findTrackIndexFor(
-					TrackInfo.MEDIA_TRACK_TYPE_TIMEDTEXT, mediaPlayer.getTrackInfo());
-			if (textTrackIndex >= 0) {
-				mediaPlayer.selectTrack(textTrackIndex);
-			} else {
-				Log.w(TAG, "Cannot find text track! The poor bastard that coded this must be an idiot!");
+	    // Set captions for room 1 to play when view renders.
+	    if(sharedPref.getBoolean("captionsOn", true))
+	    {
+		    Log.e("wiio", curPath.lastElement().first.toString());
+		    mediaPlayer = MediaPlayer.create(this, roomNarratives.get(curPath.lastElement().first).first);
+			mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
+		        public void onCompletion(MediaPlayer mp) {
+		        	// After media file ends, hide captions background box
+		    		txtDisplay.setVisibility(View.INVISIBLE);
+		        }
+		    });
+			mediaPlayer.start();
+			try {
+				mediaPlayer.addTimedTextSource(getSubtitleFile(roomNarratives.get(curPath.lastElement().first).second),
+						MediaPlayer.MEDIA_MIMETYPE_TEXT_SUBRIP);
+				int textTrackIndex = findTrackIndexFor(
+						TrackInfo.MEDIA_TRACK_TYPE_TIMEDTEXT, mediaPlayer.getTrackInfo());
+				if (textTrackIndex >= 0) {
+					mediaPlayer.selectTrack(textTrackIndex);
+				} else {
+					Log.w(TAG, "Cannot find text track! The poor bastard that coded this must be an idiot!");
+				}
+				mediaPlayer.setOnTimedTextListener(this);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			mediaPlayer.setOnTimedTextListener(this);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		
+	    }
+	    else
+	    {
+	    	txtDisplay.setVisibility(View.INVISIBLE);
+	    }
 		counterTotal = Integer.toString(curPath.size());
 	    dashboardCounterButton = (Button)findViewById(R.id.dashboard_counter_button);
 	    dashboardCounterButton.setText(counterTotal);
@@ -171,7 +171,7 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 		super.onPause();
 		//save our preferences
 		SharedPreferences.Editor prefEditor = sharedPref.edit();
-		prefEditor.clear();
+		prefEditor.remove("path");
 		prefEditor.putString("path", new Gson().toJson(curPath));
 		prefEditor.commit();
 	}
@@ -275,32 +275,33 @@ public class MainActivity extends Activity implements View.OnTouchListener,OnTim
 			curPath.add(new Pair<Integer, Integer>(destRoom, rooms.get(curRoom).get(color).second));
 			
 			// Set captions and audio
-			// We will have to wrap this block in a conditional once
-			// the user options panel is created and functional
-			mediaPlayer.release();
-			mediaPlayer = MediaPlayer.create(this, roomNarratives.get(destRoom).first);
-			txtDisplay.setVisibility(View.VISIBLE);
-			mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
-		        public void onCompletion(MediaPlayer mp) {
-		        	// After media file ends, hide captions background box
-		    		txtDisplay.setVisibility(txtDisplay.INVISIBLE);
-		        }
-		    });
-			mediaPlayer.start();
-			try {
-				mediaPlayer.addTimedTextSource(getSubtitleFile(roomNarratives.get(destRoom).second),
-						MediaPlayer.MEDIA_MIMETYPE_TEXT_SUBRIP);
-				int textTrackIndex = findTrackIndexFor(
-						TrackInfo.MEDIA_TRACK_TYPE_TIMEDTEXT, mediaPlayer.getTrackInfo());
-				if (textTrackIndex >= 0) {
-					mediaPlayer.selectTrack(textTrackIndex);
-				} else {
-					Log.w(TAG, "Cannot find text track! The poor bastard that coded this must be an idiot!");
+			if(sharedPref.getBoolean("captionsOn", true))
+			{
+				mediaPlayer.release();
+				mediaPlayer = MediaPlayer.create(this, roomNarratives.get(destRoom).first);
+				txtDisplay.setVisibility(View.VISIBLE);
+				mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
+			        public void onCompletion(MediaPlayer mp) {
+			        	// After media file ends, hide captions background box
+			    		txtDisplay.setVisibility(txtDisplay.INVISIBLE);
+			        }
+			    });
+				mediaPlayer.start();
+				try {
+					mediaPlayer.addTimedTextSource(getSubtitleFile(roomNarratives.get(destRoom).second),
+							MediaPlayer.MEDIA_MIMETYPE_TEXT_SUBRIP);
+					int textTrackIndex = findTrackIndexFor(
+							TrackInfo.MEDIA_TRACK_TYPE_TIMEDTEXT, mediaPlayer.getTrackInfo());
+					if (textTrackIndex >= 0) {
+						mediaPlayer.selectTrack(textTrackIndex);
+					} else {
+						Log.w(TAG, "Cannot find text track! The poor bastard that coded this must be an idiot!");
+					}
+					mediaPlayer.setOnTimedTextListener(this);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				mediaPlayer.setOnTimedTextListener(this);
-				
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
 		}
 	}

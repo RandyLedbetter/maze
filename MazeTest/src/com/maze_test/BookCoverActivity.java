@@ -19,7 +19,7 @@ public class BookCoverActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_bookcover);
-		sharedPref = getBaseContext().getSharedPreferences("path", Context.MODE_PRIVATE);
+		sharedPref = getBaseContext().getSharedPreferences("maze", Context.MODE_PRIVATE);
 		
 		Thread splashThread = new Thread() {
 

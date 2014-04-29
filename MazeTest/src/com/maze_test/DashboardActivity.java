@@ -40,7 +40,7 @@ implements View.OnTouchListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dashboard);
 		
-		sharedPref = getBaseContext().getSharedPreferences("path", Context.MODE_PRIVATE);
+		sharedPref = getBaseContext().getSharedPreferences("maze", Context.MODE_PRIVATE);
 		
 		ImageView iv = (ImageView) findViewById (R.id.image);
 	    iv.setImageResource(R.drawable.dashboard);
@@ -116,7 +116,6 @@ implements View.OnTouchListener {
 			@Override
 			public void onClick(View arg0) {
 				SharedPreferences.Editor prefEditor = sharedPref.edit();
-				prefEditor.clear();
 				//starting a new game, fill path shared pref with empty vector
 				prefEditor.remove("path");
 				prefEditor.commit();
@@ -134,8 +133,8 @@ implements View.OnTouchListener {
  
 			@Override
 			public void onClick(View arg0) {
- 
- 
+				Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
+				startActivity(intent);
 			}
  
 		});
@@ -148,13 +147,27 @@ implements View.OnTouchListener {
 			@Override
 			public void onClick(View arg0) {
 				
-				selectedItems = new ArrayList();
+				
+				selectedItems = new ArrayList<Integer>();
+				boolean[] setSelected = new boolean[2];
+				setSelected[1] = sharedPref.getBoolean("captionsOn", true);
+				setSelected[0]  = sharedPref.getBoolean("soundOn", false);
+				
+				if(sharedPref.getBoolean("captionsOn", true))
+				{
+					selectedItems.add(1);
+				}
+				if(sharedPref.getBoolean("soundOn", false))
+				{
+					selectedItems.add(0);
+				}
 				ContextThemeWrapper wrapper = new ContextThemeWrapper(DashboardActivity.this, android.R.style.Theme_Holo);
 				final LayoutInflater inflater = (LayoutInflater) wrapper.getSystemService(LAYOUT_INFLATER_SERVICE);
 				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(wrapper);
 				
 				// set dialog message
-				alertDialogBuilder.setTitle(R.string.options_menu).setMultiChoiceItems(R.array.options, null, new DialogInterface.OnMultiChoiceClickListener() {
+				alertDialogBuilder.setTitle(R.string.options_menu).setMultiChoiceItems(R.array.options, setSelected, new DialogInterface.OnMultiChoiceClickListener() {
+					
 					@Override
 					public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 		                if (isChecked) {
@@ -174,7 +187,31 @@ implements View.OnTouchListener {
 		            	
 		            	if(selectedItems.contains(1)){
 		            		//edit shared preferences to save captions on...
-		            		//else do not save shared preferences.
+		            		SharedPreferences.Editor prefEditor = sharedPref.edit();
+		            		prefEditor.remove("captionsOn");
+		            		prefEditor.putBoolean("captionsOn", true);
+		            		prefEditor.commit();
+		            	}
+		            	else
+		            	{
+		            		SharedPreferences.Editor prefEditor = sharedPref.edit();
+		            		prefEditor.remove("captionsOn");
+		            		prefEditor.putBoolean("captionsOn", false);
+		            		prefEditor.commit();
+		            	}
+		            	if(selectedItems.contains(0)){
+		            		//edit shared preferences to save sound on...
+		            		SharedPreferences.Editor prefEditor = sharedPref.edit();
+		            		prefEditor.remove("soundOn");
+		            		prefEditor.putBoolean("soundOn", true);
+		            		prefEditor.commit();
+		            	}
+		            	else
+		            	{
+		            		SharedPreferences.Editor prefEditor = sharedPref.edit();
+		            		prefEditor.remove("soundOn");
+		            		prefEditor.putBoolean("soundOn", false);
+		            		prefEditor.commit();
 		            	}
 		            }
 		        })
